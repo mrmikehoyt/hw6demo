@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/78a831af9b.js" crossorigin="anonymous"></script>
+    <title>Weather App</title>
+</head>
+<body>
+  <!---->
+  
+  <!---->
+      <!---->
+      <!---->
+    <ul class="nav justify-content-left navbar-light">
+      <div class="card" style="width: 18rem;">
+      <!--  <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+          <h5 class="card-title">Search For A City</h5>
+       <!--   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+       <!---->
+        <div class="input-group">
+          <div class="input-group-append">
+            <input type="text" class="input-group-text p-2 mb-5" placeholder="Enter City Name" aria-label="City Name" aria-describedby="button-addon2" id="cityname5day">
+            <button class="btn btn-secondary p-2 mb-5 bg-primary text-white" type="button" id="fivedaycitysearch"><i class="fas fa-search"></i></button>
+<!--            <div class="input-group-text" id="btnGroupAddon">@</div> -->
+          
+  </div>
+       </div>
+      <!---->
+
+        <!---->
+        <div id="cityList"><ul class="list-group list-group-flush"></div>
+          <div id="cityListItem"></div>
+
+       
+        <!---->
+      </div>
+   </ul> 
+      <!---->
+        <!---->
+        
+       
+   
+        
+        
+        <!---->
+<!---->
+
+
+<!---->
+
+<!--specifying div id's which are used later on for displaying information-->
+
+    <div class="card">
+      <div class="card-body" id="weatherHeadLine">
+        <img id="wicon" src=""></img>
+        <div id="city"></div>
+        <div id="wind"></div>
+        <div id="humidity"></div>
+        <div id="temp"></div>
+        <div id="uvindex"></div>
+        
+      </div>
+    </div>  
+    <!---->
+    <script>
+//
+let citysearchbtn = document.querySelector("#citysearch");
+let citysearch5day = document.querySelector("#fivedaycitysearch");
+citysearch5day.addEventListener("click", cityName5dayWeather);{
+}
+//
+function cityName5dayWeather(){
+          let cityname2 = document.getElementById('cityname5day').value;
+          let cityListItemElementId = document.getElementById("cityListItem");
+let  cityListItem = document.createElement("ul");
+cityListItem.innerText=cityname2
+cityListItemElementId.classList.add('list-group-item','list-group-item-light','border','rounded')
+cityListItemElementId.appendChild(cityListItem)  
+
+                console.log(cityname2);
+             let APIKey2 = '166a433c57516f51dfab1f7edaed8413'
+              //cnt=50 in url specifys how long forecast would be for
+              let queryURL2 = 'http://api.openweathermap.org/data/2.5/forecast?' +
+              'q=' + cityname2 + '&appid=' + APIKey2 + '&cnt=50'
+                fetch(queryURL2)
+                .then(function (response) {
+                  return response.json()
+                })
+                .then(function (list) { 
+                  console.log(queryURL2)
+                  console.log(list)
+                  let fivedaycitythree = document.getElementById("searchfirst");
+                  let createfivedaycityelement = document.createElement('p')
+                 let wicon2 = document.getElementById('wicon2');  
+                 for(i=0;i < list.list.length  ;i++){
+                  let iconCode5 = list.list[i].weather[0].icon 
+                  let iconurl5 = "http://openweathermap.org/img/w/" + iconCode5 + ".png"
+                  let newButtonElementID = document.getElementById("buttons");
+                let  newButton = document.createElement("button");
+                let newButtonAttribute = newButton.setAttribute("img"+"src", iconurl5)
+                let tempC = list.list[i].main.temp - 273.15
+                let tempF = tempC * (9 / 5) + 32
+//used for displaying with information for duration that array is called
+                for(j = 0; j < list.list.length; j++){
+                
+                document.body.appendChild(newButton);
+                newButton.innerHTML = '<img id="iconweather" src="http://openweathermap.org/img/w/'+ iconCode5 +'.png" alt="Weather Icon"></img>'
+                newButton.innerHTML += '<p></p>'+'Weather Time and Date ' + '<p></p>' + list.list[i].dt_txt + '<p></p>'
+                newButton.innerHTML += list.city.name  + ' Weather' + '<p> </p>' 
+                newButton.innerHTML += 'Humidity ' + list.list[i].main.humidity + '<p> </p>';
+                newButton.innerHTML += 'Wind Speed ' + list.list[i].wind.speed + '<p> </p>'
+                newButton.innerHTML += 'Temperature ' + tempC.toFixed(1);
+  //below is used for displaying weather data for the day
+                let APIKey = 'a346a90aa650f3415e4dcb4f9c7af4ff'
+                let queryURL =
+                'https://api.openweathermap.org/data/2.5/weather?' +
+                'q=' + cityname2 + '&appid=' +
+                APIKey + '&cnt=3'
+                fetch(queryURL)
+        .then(function (response) {
+          return response.json()
+        })
+        .then(function (data) { 
+          console.log(queryURL)
+         console.log(data)
+//converting temp to celcius         
+         let tempC2 = data.main.temp - 273.15
+          let tempF2 = tempC2 * (9 / 5) + 32
+          let iconCode = data.weather[0].icon
+          let iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png"
+//updating element id to display city, wind,humidity,icon,temp,etc
+          document.getElementById('city').innerHTML =
+            '<h1>' + data.name + ' Weather Details</h1>'
+          document.getElementById('wind').textContent =
+            'Wind Speed: ' + data.wind.speed + ' m/s'
+          document.getElementById('humidity').textContent =
+            'Humidity: ' + data.main.humidity + '%'
+          document.getElementById('wicon').src =  iconurl
+          document.getElementById('temp').textContent =
+            'Temperature: ' + tempC2.toFixed(1); + '%'
+        })
+              } 
+          }
+                  })
+  }
+//
+//
+
+//
+//5 day 3 hour url http://api.openweathermap.org/data/2.5/forecast?q=vancouver&appid=a346a90aa650f3415e4dcb4f9c7af4ff
+//
+</script>
+</body>
+</html>

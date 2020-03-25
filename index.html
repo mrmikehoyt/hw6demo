@@ -97,7 +97,7 @@ cityListItemElementId.appendChild(cityListItem)
                  let wicon2 = document.getElementById('wicon2');  
                  for(i=0;i < list.list.length  ;i++){
                   let iconCode5 = list.list[i].weather[0].icon 
-                  let iconurl5 = "http://openweathermap.org/img/w/" + iconCode5 + ".png"
+                  let iconurl5 = "https://openweathermap.org/img/w/" + iconCode5 + ".png"
                   let newButtonElementID = document.getElementById("buttons");
                 let  newButton = document.createElement("button");
                 let newButtonAttribute = newButton.setAttribute("img"+"src", iconurl5)
@@ -107,7 +107,7 @@ cityListItemElementId.appendChild(cityListItem)
                 for(j = 0; j < list.list.length; j++){
                 
                 document.body.appendChild(newButton);
-                newButton.innerHTML = '<img id="iconweather" src="http://openweathermap.org/img/w/'+ iconCode5 +'.png" alt="Weather Icon"></img>'
+                newButton.innerHTML = '<img id="iconweather" src="https://openweathermap.org/img/w/'+ iconCode5 +'.png" alt="Weather Icon"></img>'
                 newButton.innerHTML += '<p></p>'+'Weather Time and Date ' + '<p></p>' + list.list[i].dt_txt + '<p></p>'
                 newButton.innerHTML += list.city.name  + ' Weather' + '<p> </p>' 
                 newButton.innerHTML += 'Humidity ' + list.list[i].main.humidity + '<p> </p>';
@@ -130,7 +130,7 @@ cityListItemElementId.appendChild(cityListItem)
          let tempC2 = data.main.temp - 273.15
           let tempF2 = tempC2 * (9 / 5) + 32
           let iconCode = data.weather[0].icon
-          let iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png"
+          let iconurl = "https://openweathermap.org/img/w/" + iconCode + ".png"
 //updating element id to display city, wind,humidity,icon,temp,etc
           document.getElementById('city').innerHTML =
             '<h1>' + data.name + ' Weather Details</h1>'
@@ -150,7 +150,7 @@ cityListItemElementId.appendChild(cityListItem)
 //
 
 //
-//5 day 3 hour url http://api.openweathermap.org/data/2.5/forecast?q=vancouver&appid=a346a90aa650f3415e4dcb4f9c7af4ff
+//5 day 3 hour url https://api.openweathermap.org/data/2.5/forecast?q=vancouver&appid=a346a90aa650f3415e4dcb4f9c7af4ff
 //
 </script>
 </body>

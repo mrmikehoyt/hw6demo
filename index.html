@@ -83,7 +83,7 @@ cityListItemElementId.appendChild(cityListItem)
                 console.log(cityname2);
              let APIKey2 = '166a433c57516f51dfab1f7edaed8413'
               //cnt=50 in url specifys how long forecast would be for
-              let queryURL2 = 'http://api.openweathermap.org/data/2.5/forecast?' +
+              let queryURL2 = 'https://api.openweathermap.org/data/2.5/forecast?' +
               'q=' + cityname2 + '&appid=' + APIKey2 + '&cnt=50'
                 fetch(queryURL2)
                 .then(function (response) {
